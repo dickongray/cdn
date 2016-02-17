@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>Link</title>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+	<link rel="stylesheet" href="custom.css">
+</head>
+<body ng-controller="linksCtrl" class="flex flex-column flex-j-center flex-a-center">
+
+	<div class="container">
+		<div class="flex flex-column">
+			<input type="text" ng-model="current_url" readonly class="form-control" sync-focus-with="focus" select-on-click ng-blur="unfocus($event)" placeholder="Click one of the links below" ng-class="{show: current_url != ''}">
+
+			<div class="flex flex-j-between flex-a-start">
+				<h1>CDN Links</h1>
+
+				<ul class="list">
+					<li ng-repeat="link in links">
+						<a href="{{ link.url }}" ng-click="set_link(link)" ng-class="{current: link == current_link}">{{ link.name }}</a>
+						<i class="fa fa-check"></i>
+					</li>
+				</ul>
+
+				<div class="controls flex flex-column flex-a-start">
+					<label for="tag">
+						<input type="checkbox" id="tag" ng-model="show_tag" ng-change="update_tag()"> Include tag
+					</label>
+					<br>
+					<label for="none">
+						<input type="radio" id="none" name="protocol" value="//" ng-model="protocol" ng-change="update_tag()"> //
+					</label>
+					<label for="http">
+						<input type="radio" id="http" name="protocol" value="http://" ng-model="protocol" ng-change="update_tag()"> http://
+					</label>
+					<label for="https">
+						<input type="radio" id="https" name="protocol" value="https://" ng-model="protocol" ng-change="update_tag()"> https://
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="custom.js"></script>
+</body>
+</html>
